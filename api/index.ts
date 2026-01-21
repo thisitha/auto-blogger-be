@@ -9,8 +9,17 @@ export default async function handler(req: any, res: any) {
         app = await NestFactory.create(AppModule);
 
         // Enable CORS
+        const envOrigins = (process.env.FRONTEND_URL || '').split(',').map(origin => origin.trim()).filter(Boolean);
+        const allowedOrigins = [
+            ...envOrigins,
+            'http://localhost:3000',
+            'https://blog.thisitha.me',
+            'https://thisitha.me',
+            'https://www.thisitha.me'
+        ];
+
         app.enableCors({
-            origin: process.env.FRONTEND_URL || '*', // Allow all or specific origin
+            origin: allowedOrigins,
             methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
             credentials: true,
         });
