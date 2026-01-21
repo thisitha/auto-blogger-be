@@ -14,7 +14,7 @@
     "crons": [
         {
             "path": "/api/agent/trigger",
-            "schedule": "0 */2 * * *"
+            "schedule": "0 12 * * *"
         }
     ]
 }
